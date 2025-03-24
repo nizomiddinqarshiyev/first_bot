@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    container_name: aiogram-bot
+    restart: always
+    environment:
+      - BOT_TOKEN=6506997439:AAH9eQBPpzZKmfTnp2cFGgbNrFfJUuNA8bs
+      - OPENWEATHERMAP_API_KEY=9feaacebc8d06153712bf2d5d4f04d6e
+      - OPENAI_API_KEY=''
+    volumes:
+      - ./videos:/app/videos
+      - ./images:/app/images
+    command: ["python", "bot.py"]

@@ -1,0 +1,42 @@
+# Python umumiy fayllari
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual muhit (venv)
+.venv/
+.env
+*.env
+
+# Docker fayllari
+docker-compose.override.yml
+*.log
+
+# IDE va OS-fayllar
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Cache va vaqtinchalik fayllar
+*.tmp
+*.swp
+*.swo
+
+# Yuklab olingan videolar va rasmlar
+videos/
+images/
+
+# Noto'g'ri yuklangan fayllar
+*.bak
+*.old
+*.orig
+
+# Maxfiy kalitlar va konfiguratsiya fayllari
+config.py
+config.json
+secrets.yaml
+
+# PyCharm va boshqa IDE fayllari
+*.iml
