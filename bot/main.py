@@ -5,7 +5,6 @@ from aiogram.types import Message, FSInputFile, URLInputFile
 import asyncio
 from aiogram import Router
 import logging
-import config
 import aiohttp
 import instaloader
 import os
@@ -15,10 +14,25 @@ from pytube import YouTube
 from pytube.exceptions import VideoUnavailable
 import re
 
+
+
+
+
+
+
+BOT_TOKEN = '6506997439:AAH9eQBPpzZKmfTnp2cFGgbNrFfJUuNA8bs'
+ADMIN_ID = '5339188029'
+API_URL = 'https://api.telegram.org/bot'
+OPENWEATHERMAP_API_KEY = '9feaacebc8d06153712bf2d5d4f04d6e'
+
+
+
+
+
 router = Router()
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=config.BOT_TOKEN)
+bot = Bot(token=BOT_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 dp.include_router(router)
@@ -29,7 +43,7 @@ async def start_or_help_handler(message: Message):
 
 # Connect to OpenWeatherMap API
 async def get_weather(city: str):
-    api_key = config.OPENWEATHERMAP_API_KEY
+    api_key = OPENWEATHERMAP_API_KEY
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     async with aiohttp.ClientSession() as session:
         params = {"q": city, "appid": api_key, "units": "metric"}
@@ -54,7 +68,7 @@ async def weather_handler(message: Message):
 
 # Connect to OpenAI API
 async def get_response(text: str):
-    api_key = config.OPENAI_API_KEY
+    api_key = " "
     base_url = "https://api.openai.com/v1/engines/davinci/completions"
     headers = {"Authorization": f"Bearer {api_key}"}
     data = {"prompt": text, "max_tokens": 100}
@@ -63,15 +77,15 @@ async def get_response(text: str):
             data = await response.json()
             return data
 
-async def get_response_with_playwright():
-    async with playwright.async_api.async_playwright() as p:
-        browser = await p.chromium.launch()
-        page = await browser.new_page()
-        await page.goto("https://kun.uz/")
-        await page.wait_for_timeout(5000)
-        response = await page.get_by_role("main-news__left-hero")
-        await browser.close()
-        return response
+# async def get_response_with_playwright():
+#     async with playwright.async_api.async_playwright() as p:
+#         browser = await p.chromium.launch()
+#         page = await browser.new_page()
+#         await page.goto("https://kun.uz/")
+#         await page.wait_for_timeout(5000)
+#         response = await page.get_by_role("main-news__left-hero")
+#         await browser.close()
+#         return response
 
 async def get_response_with_requests():
     response = requests.get("https://kun.uz/")
