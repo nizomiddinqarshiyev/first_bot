@@ -43,3 +43,6 @@ python bot/main.py
 ## Contributing
 
 Feel free to submit issues or pull requests to improve the bot or add new features.
+
+
+I am editing the README file. Adding some more details about the project description.
